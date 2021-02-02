@@ -1,32 +1,25 @@
-# MyContex
-Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL programs with GLFW
+#include "../context_util/util.h"
 
-*required libraries (-l) GL GLEW glfw*
+int main(int argc, char **argv) {
 
------------------------------------
+	/*
+	 * SIMPLE TIMER
+	 */
+	const char *SIMPLE_TIMER = "Simple_Timer";
+	int flag = 0;
+	while (flag < 5) {
+		if (TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000) {
 
-How to use TempoMap : 
-
-* create a simple timer : *the timer is created at the first call of TempoMap::getElapsedMill(string);*
- 
-```cpp
-	
-	const char* SIMPLE_TIMER = "Simple_Timer";
-
-	while(true)  {
-		if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
-
-			std::cout<<"hello"<<std::endl;
+			std::cout << "hello" << std::endl;
+			flag++;
 
 			TempoMap::updateStart(SIMPLE_TIMER);
 		}
 	}
 
-```
-
-* create two OpenGL context : * GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa clock_gettime evdev shared *
-
-```cpp
+	/*
+	 * Create OpenGL Context
+	 */
 
 	if (!glfwInit()) {
 		fprintf(stderr, "GLEW INTI ERROR");
@@ -41,11 +34,18 @@ How to use TempoMap :
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	
+
+
+	//To enable set DEVELOPEMENT 1 in contex_util/CommonHeaders
+#if DEVELOPEMENT
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+#endif
+
 	const char *CONTEX_1 = "ctx1", *CONTEX_2 = "ctx_2";
 
-//  name,  w,  h, GLFWmonitor*,  visible,  decorated,  trasparentFrameBuffer) 
-	OpenGLContext::createContex(CONTEX_1, 400, 400, NULL, true, false, true);
+	//                           name,  w,  h, GLFWmonitor*,  visible,  decorated,  trasparentFrameBuffer)
+	OpenGLContext::createContex(CONTEX_1, 400, 400, NULL, true, true, true);
+
 	OpenGLContext::createContex(CONTEX_2, 400, 400, NULL, true, false, true);
 
 	OpenGLContext::setWindowPosition(CONTEX_1, 50, 50);
@@ -63,20 +63,34 @@ How to use TempoMap :
 	});
 
 	while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
-		
+
 		//DIsplay
-		
+
 		glfwPollEvents(); //  It MUST be in the main thread
-		
 	}
+
 	OpenGLContext::destroyAll();
 
 	glfwTerminate();
-	
-```
+}
 
-* create multiple program in one context : * for example in previous CONTEX_1 *
 
-```cpp
 
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
