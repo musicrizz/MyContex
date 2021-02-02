@@ -77,10 +77,43 @@ How to use TempoMap :
 ```
 
 * create multiple program in one context : 
-*for example in previous CONTEX_1 three program with uniform buffer*
+*for example in previous CONTEX_1 two program with uniform buffer and one program in CONTEX_2*
 
 ```cpp
 
+//CONTEX 1
+OpenGLContext::makecurrent(CONTEX_1);
+ShaderMap::createProgram(SIMPLE_TRIANGLE, "simpleTriangle_vrtx.glsl", "simpleTriangle_frag.glsl");
+ShaderMap::createProgram(POINT_SPRITE, "PointSprite_vertx.glsl", "PointSprite_frag.glsl");
+
+unsigned int uniform_binding_point = 2;
+ShaderMap::bindingUniformBlocks("CommonUniform", uniform_binding_point);
+glBindBufferBase(GL_UNIFORM_BUFFER, uniform_binding_point, buffers[UNIFORM]);
+//......other OpenGl stuff
+
+//CONTEXT 2
+OpenGLContext::makecurrent(CONTEX_2);
+ShaderMap::createProgram(TEXTURE_CAM, "CameraTexture_vertx.glsl", "CameraTexture_frag.glsl");
+//.....other OpenGl stuff
+
+while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
+
+	OpenGLContext::makecurrent(CONTEX_1);
+			//DIsplay CONTEX 1
+	OpenGLContext::swapBuffers();
+	OpenGLContext::releaseContex();
+	
+	OpenGLContext::makecurrent(CONTEX_2);
+			//DIsplay CONTEX 2
+	OpenGLContext::swapBuffers();
+	OpenGLContext::releaseContex();
+		
+	glfwPollEvents(); //  It MUST be in the main thread
+		
+}
+OpenGLContext::destroyAll();
+
+glfwTerminate();
 
 
 ```
