@@ -14,16 +14,16 @@ How to use TempoMap :
  
 ```cpp
 	
-	const char* SIMPLE_TIMER = "Simple_Timer";
+const char* SIMPLE_TIMER = "Simple_Timer";
 
-	while(true)  {
-		if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
+while(true)  {
+	if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
 
-			std::cout<<"hello"<<std::endl;
+		std::cout<<"hello"<<std::endl;
 
-			TempoMap::updateStart(SIMPLE_TIMER);
-		}
+		TempoMap::updateStart(SIMPLE_TIMER);
 	}
+}
 
 ```
 
@@ -31,51 +31,52 @@ How to use TempoMap :
 
 ```cpp
 
-	if (!glfwInit()) {
-		fprintf(stderr, "GLEW INTI ERROR");
-		exit(EXIT_FAILURE);
-	}
+if (!glfwInit()) {
+	fprintf(stderr, "GLEW INTI ERROR");
+	exit(EXIT_FAILURE);
+}
 
-	glfwSetErrorCallback ([](int error, const char *description) {
-		fprintf(stderr, "GLFW_ERROR: %u :  %s ", error, description);
-	});
+glfwSetErrorCallback ([](int error, const char *description) {
+	fprintf(stderr, "GLFW_ERROR: %u :  %s ", error, description);
+});
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	
-	const char *CONTEX_1 = "ctx1", *CONTEX_2 = "ctx_2";
+const char *CONTEX_1 = "ctx1", *CONTEX_2 = "ctx_2";
 
 //  name,  w,  h, GLFWmonitor*,  visible,  decorated,  trasparentFrameBuffer) 
-	OpenGLContext::createContex(CONTEX_1, 400, 400, NULL, true, false, true);
-	OpenGLContext::createContex(CONTEX_2, 400, 400, NULL, true, false, true);
+OpenGLContext::createContex(CONTEX_1, 400, 400, NULL, true, false, true);
+OpenGLContext::createContex(CONTEX_2, 400, 400, NULL, true, false, true);
 
-	OpenGLContext::setWindowPosition(CONTEX_1, 50, 50);
-	OpenGLContext::setWindowPosition(CONTEX_2, 0, 880);
+OpenGLContext::setWindowPosition(CONTEX_1, 50, 50);
+OpenGLContext::setWindowPosition(CONTEX_2, 0, 880);
 
-	OpenGLContext::makecurrent(CONTEX_1);
-	OpenGLContext::setKeyboard(
-		[](GLFWwindow* window, int key, int scancode, int action, int mods ){
-			switch (key) {
-			case GLFW_KEY_ESCAPE:
-				if (action == GLFW_PRESS) {
-					OpenGLContext::setWindowShouldClose(GL_TRUE);
-				}
-				break;
+OpenGLContext::makecurrent(CONTEX_1);
+OpenGLContext::setKeyboard(
+	[](GLFWwindow* window, int key, int scancode, int action, int mods ){
+		switch (key) {
+		case GLFW_KEY_ESCAPE:
+			if (action == GLFW_PRESS) {
+				OpenGLContext::setWindowShouldClose(GL_TRUE);
 			}
-	});
-
-	while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
-		
-		//DIsplay
-		
-		glfwPollEvents(); //  It MUST be in the main thread
-		
+			break;
+		}
 	}
-	OpenGLContext::destroyAll();
+);
 
-	glfwTerminate();
+while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
+		
+	//DIsplay
+		
+	glfwPollEvents(); //  It MUST be in the main thread
+		
+}
+OpenGLContext::destroyAll();
+
+glfwTerminate();
 	
 ```
 
@@ -106,6 +107,8 @@ while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
 	OpenGLContext::swapBuffers();
 	OpenGLContext::releaseContex();
 	
+	//Swap Context ;)
+		
 	OpenGLContext::makecurrent(CONTEX_2);
 			//DIsplay CONTEX 2
 	OpenGLContext::swapBuffers();
