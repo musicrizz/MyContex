@@ -3,8 +3,9 @@ Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL pr
 
 *required libraries (-l) GL GLEW glfw*
 
->You can found complete and working examples in this git repo:
->https://github.com/musicrizz/MyContext
+>* You can found complete and working examples in this git repos: 
+	* [My Utility For TheBookOfShader & ShaderToy](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
+
 
 -----------------------------------
 
