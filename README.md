@@ -24,7 +24,7 @@ How to use TempoMap :
 
 ```
 
-* create two OpenGL context : * GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa clock_gettime evdev shared *
+* create two OpenGL context : *GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa clock_gettime evdev shared*
 
 ```cpp
 
@@ -52,7 +52,8 @@ How to use TempoMap :
 	OpenGLContext::setWindowPosition(CONTEX_2, 0, 880);
 
 	OpenGLContext::makecurrent(CONTEX_1);
-	OpenGLContext::setKeyboard([](GLFWwindow* window, int key, int scancode, int action, int mods ){
+	OpenGLContext::setKeyboard(
+		[](GLFWwindow* window, int key, int scancode, int action, int mods ){
 			switch (key) {
 			case GLFW_KEY_ESCAPE:
 				if (action == GLFW_PRESS) {
@@ -75,8 +76,11 @@ How to use TempoMap :
 	
 ```
 
-* create multiple program in one context : * for example in previous CONTEX_1 *
+* create multiple program in one context : 
+*for example in previous CONTEX_1 three program with uniform buffer*
 
 ```cpp
+
+
 
 ```
