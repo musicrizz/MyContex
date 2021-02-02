@@ -1,7 +1,10 @@
-# MyContex
+# MyContext
 Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL programs with GLFW
 
 *required libraries (-l) GL GLEW glfw*
+
+>You can found complete and working examples in this git repo:
+>
 
 -----------------------------------
 
