@@ -54,15 +54,15 @@ The timers can start, stop and delete from the map
 
 ```cpp
 
-	std::string timer_simple = "timer simple name";
-	
+	std::string timer_simple = "timer simple name";	
 	//Simple Timer - execute function every 400 millis
 	TempoMap::createTimer(timer_simple, []()->void{
 		std::cout<<"test timer"<<std::endl;
 	}, 400);
 	
-	std::string timer_with_timeout = "timer timeout name";
+	//-------
 	
+	std::string timer_with_timeout = "timer timeout name";	
 	//Timer with timeout - execute function every 1,5 seconds ,
 	//and stop after 5 seconds
 	TempoMap::createTimer(timer_simple, []()->void{
@@ -100,8 +100,9 @@ glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 const char *CONTEX_1 = "ctx1", *CONTEX_2 = "ctx_2";
 
 //  name,  w,  h, GLFWmonitor*,  visible,  decorated,  trasparentFrameBuffer) 
-OpenGLContext::createContex(CONTEX_1, 400, 400, NULL, true, false, true);
-OpenGLContext::createContex(CONTEX_2, 400, 400, NULL, true, false, true);
+OpenGLContext::createContext(CONTEX_1, 400, 400, NULL, true, false, true); //CONTEXT 1
+
+OpenGLContext::createContext(CONTEX_2, 400, 400, NULL, true, false, true); //CONTEXT 2
 
 OpenGLContext::setWindowPosition(CONTEX_1, 50, 50);
 OpenGLContext::setWindowPosition(CONTEX_2, 0, 880);
@@ -132,8 +133,10 @@ glfwTerminate();
 	
 ```
 
-* create multiple program in one context : 
-*for example in previous CONTEX_1 two program with uniform buffer and one program in CONTEX_2*
+* create multiple glsl programs in one context : 
+*for example in the following code, we use previous CONTEX_1 to create two program with uniform buffer and in CONTEX_2 I create a standard glsl program*
+
+  complete example is [MultipleContext](https://github.com/musicrizz/Multiple-Context-GLFW-example) or //TOdo
 
 ```cpp
 
