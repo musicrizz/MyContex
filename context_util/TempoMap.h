@@ -19,6 +19,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <atomic>
 
 #include "Tempo.h"
 #include "Timer.h"
@@ -30,11 +31,13 @@ class TempoMap {
 private:
 
 	static std::unordered_map<std::string, Tempo*> tempo_map;
+	static std::mutex _mutex_tempo;
 
 	static std::unordered_map<std::string, Timer*> timer_map;
 	static std::thread _thread_timers;
-	static std::mutex _mtx;
+	static std::mutex _mutex_timers;
 	static std::condition_variable _cond_var;
+
 
 	static bool init_flag;
 
@@ -54,7 +57,7 @@ public:
 
 	//Create and manage Tempo
 
-	static void create(std::string);
+	static void create(std::string); //to delete - useless
 
 	static Tempo* get(std::string);
 

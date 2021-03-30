@@ -23,13 +23,19 @@ int main(int argc, char **argv) {
 		}, 1500, 5000);
 
 
+	int cont=0;
 	while(true)  {
+
 		if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
 
 			std::cout<<"hello"<<std::endl; //hello will be printed each second
-
+			cont++;
 			TempoMap::updateStart(SIMPLE_TIMER);
 		}
+
+
+
+
 	}
 
 
