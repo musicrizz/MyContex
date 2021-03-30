@@ -7,7 +7,7 @@ There are also an utility TempoMap to create a map of simple Tempo and Timer.
 
 * You can found complete and working examples in this git repos: 
 	* [My Utility For TheBookOfShader & ShaderToy](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
-	* [Multiple Context GLFW example](https://github.com/musicrizz/Multiple-Context-GLFW-example)
+	* [Multiple Context GLFW - example](https://github.com/musicrizz/Multiple-Context-GLFW-example)
 
 
 -----------------------------------
