@@ -3,6 +3,8 @@ Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL pr
 
 *required libraries (-l) GL GLEW glfw*
 
+There are also an utility TempoMap to create a map of simple Tempo and Timer.
+
 * You can found complete and working examples in this git repos: 
 	* [My Utility For TheBookOfShader & ShaderToy](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
 	* [Multiple Context GLFW example](https://github.com/musicrizz/Multiple-Context-GLFW-example)
@@ -12,7 +14,7 @@ Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL pr
 
 How to use TempoMap : 
 
-* create a simple timer : *the timer is created at the first call of TempoMap::getElapsedMill(string);*
+* create a simple tempo : *the tempo is created at the first call of TempoMap::getElapsedMill(string);*
  
 ```cpp
 	
@@ -21,7 +23,7 @@ const char* SIMPLE_TIMER = "Simple_Timer";
 while(true)  {
 	if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
 
-		std::cout<<"hello"<<std::endl;
+		std::cout<<"hello"<<std::endl; //hello will be printed each second
 
 		TempoMap::updateStart(SIMPLE_TIMER);
 	}
@@ -29,7 +31,14 @@ while(true)  {
 
 ```
 
-* create two OpenGL context : *GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa clock_gettime evdev shared*
+* create an infinite Timer : *
+
+
+--------------------------------------
+
+How to use multiple GLFW Contex :
+
+* create two OpenGL context : *GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa *
 
 ```cpp
 
