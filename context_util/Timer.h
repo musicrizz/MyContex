@@ -42,7 +42,7 @@ private:
 public:
 
 	Timer(void (*function)(), long long int interval, long long int timeout = -1, bool started = true) :
-			pf(function), _interval(interval), _timeout(timeout), _started(started) {
+			pf(function), _interval(abs(interval)), _timeout(timeout), _started(started) {
 		timeout <= 0 ? _infinite = true : _infinite = false;
 		started ? _tempo = new Tempo() : _tempo = nullptr;
 		_timeout_counter=0;

@@ -14,8 +14,13 @@ There are also an utility TempoMap to create a map of simple Tempo and Timer.
 
 How to use TempoMap : 
 
-* create a simple tempo : *the tempo is created at the first call of TempoMap::getElapsedMill(string);*
- 
+(*TempoMap is ThreadSafe*)
+
+* create a simple tempo : 
+
+*the tempo is created at the first call of* `TempoMap::getElapsedMill( std:: string );`  
+*there are also other methods* `getElapsedMicro` , `getElapsedNano` ...
+
 ```cpp
 	
 const char* SIMPLE_TIMER = "Simple_Timer";
@@ -31,10 +36,46 @@ while(true)  {
 
 ```
 
-* create an infinite Timer : *
+* create Timer : 
 
+	`static void createTimer(std::string name, void (*pFunc)(), unsigned long long int interval, long long int timeout = -1, bool started = true);`
+			
+*name*     = map key
 
---------------------------------------
+*pFunc*    = function to execute at interval
+
+*interval* = interval in millis
+
+*timeout*  = in millis , if negative the timer is infinite
+
+*started*  = boolean flag to start at creation
+
+The timers can start, stop and delete from the map
+
+```cpp
+
+	std::string timer_simple = "timer simple name";
+	
+	//Simple Timer - execute function every 400 millis
+	TempoMap::createTimer(timer_simple, []()->void{
+		std::cout<<"test timer"<<std::endl;
+	}, 400);
+	
+	std::string timer_with_timeout = "timer timeout name";
+	
+	//Timer with timeout - execute function every 1,5 seconds ,
+	//and stop after 5 seconds
+	TempoMap::createTimer(timer_simple, []()->void{
+		std::cout<<"test timer"<<std::endl;
+	}, 1500, 5000 );
+	
+	//the timers if ended or stopped can be restarted ;) 
+	TempoMap::startTimer(timer_with_timeout);
+	
+
+```
+
+----------------------------------------
 
 How to use multiple GLFW Contex :
 

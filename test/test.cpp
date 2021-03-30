@@ -13,9 +13,15 @@ const char* SIMPLE_TIMER = "Simple_Timer";
 
 int main(int argc, char **argv) {
 
+	//Simple Timer - execute function every 400 millis
 	TempoMap::createTimer("asdasd", []()->void{
-		std::cout<<"test timer"<<std::endl;
+		std::cout<<"test timer simple 400"<<std::endl;
 	}, 400);
+
+	TempoMap::createTimer("qqqq", []()->void{
+			std::cout<<"test timer 1500"<<std::endl;
+		}, 1500, 5000);
+
 
 	while(true)  {
 		if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
@@ -25,5 +31,6 @@ int main(int argc, char **argv) {
 			TempoMap::updateStart(SIMPLE_TIMER);
 		}
 	}
+
 
 }

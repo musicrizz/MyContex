@@ -103,7 +103,7 @@ void TempoMap::routine()  {
 			std::for_each(timer_map.begin(), timer_map.end(), [](std::pair<std::string, Timer*> elm){
 
 				if(elm.second->isStarted() && elm.second->checkElapsed() && !elm.second->checkTimeOut())  {
-//TO DO - implementing Thread pool
+					//TO DO - implementing Thread pool
 					((void (*)())elm.second->getFun())();
 				}
 
