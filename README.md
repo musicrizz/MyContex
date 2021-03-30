@@ -121,8 +121,20 @@ OpenGLContext::setKeyboard(
 );
 
 while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
+	
+	//in the main thread you have to swap context	
+	
+	OpenGLContext::makecurrent(CONTEX_1);
+			//DIsplay CONTEX 1 ...
+	OpenGLContext::swapBuffers();
+	OpenGLContext::releaseContex();
+	
 		
-	//DIsplay
+	OpenGLContext::makecurrent(CONTEX_2);
+			//DIsplay CONTEX 2 ...
+	OpenGLContext::swapBuffers();
+	OpenGLContext::releaseContex();
+	
 		
 	glfwPollEvents(); //  It MUST be in the main thread
 		
