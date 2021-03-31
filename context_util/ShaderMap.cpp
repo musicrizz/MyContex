@@ -33,8 +33,8 @@ bool ShaderMap::createProgram(std::string name, const char *vertexPath, const ch
 			return true;
 		}
 	} catch (ShaderException &e) {
-		fprintf(stderr,"Create Program %s ShaderException: \n %s \n", name.c_str(), e.what());
-		// throw
+		//fprintf(stderr,"Create Program %s ShaderException: \n %s \n", name.c_str(), e.what());
+		throw e;
 	}
 
 	return false;
