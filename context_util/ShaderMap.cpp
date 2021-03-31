@@ -62,8 +62,8 @@ unsigned int ShaderMap::getProgram(std::string name)  {
 	return 0;*/
 }
 
-void ShaderMap::useProgram(int p)  {
-	glUseProgram(p);
+void ShaderMap::program_null()  {
+	glUseProgram(0);
 }
 
 unsigned int ShaderMap::getCurrentProgram()  {
