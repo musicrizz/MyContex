@@ -69,7 +69,7 @@ The timers can start, stop and delete from the map
 		std::cout<<"test timer"<<std::endl;
 	}, 1500, 5000 );
 	
-	//the timers if ended or stopped can be restarted ;) 
+	//the timers that ended or was stopped can be restarted ;) 
 	TempoMap::startTimer(timer_with_timeout);
 	
 
