@@ -99,7 +99,7 @@ void TempoMap::init()  {
 }
 
 void TempoMap::routine()  {
-	while(true){
+	 for(;;){
 		std::unique_lock<std::mutex> lk(_mutex_timers, std::defer_lock);
 
 		if (lk.try_lock()) {
