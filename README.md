@@ -186,7 +186,7 @@ while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
 	OpenGLContext::makecurrent(CONTEX_2);
 			//DIsplay CONTEX 2
 	OpenGLContext::swapBuffers();
-	OpenGLContext::releaseContex();
+	
 	
 	//the events of keyboard or mouse ecc will be handled 
 	//by the last current context - OpenGLContext::makecurrent(..)
