@@ -8,17 +8,17 @@
 #include "../context_util/util.h"
 #include <iostream>
 
-const char* SIMPLE_TIMER = "Simple_Timer";
+const char* SIMPLE_TEMPO = "Simple_Tempo";
 
 
 int main(int argc, char **argv) {
 
 	//Simple Timer - execute function every 400 millis
-	TempoMap::createTimer("asdasd", []()->void{
+	TempoMap::createTimer("timer1", []()->void{
 		std::cout<<"test timer simple 400"<<std::endl;
 	}, 400);
 
-	TempoMap::createTimer("qqqq", []()->void{
+	TempoMap::createTimer("timer2", []()->void{
 			std::cout<<"test timer 1500"<<std::endl;
 		}, 1500, 5000);
 
@@ -26,11 +26,11 @@ int main(int argc, char **argv) {
 	int cont=0;
 	while(true)  {
 
-		if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
+		if(TempoMap::getElapsedMill(SIMPLE_TEMPO) >= 1000)  {
 
 			std::cout<<"hello"<<std::endl; //hello will be printed each second
 			cont++;
-			TempoMap::updateStart(SIMPLE_TIMER);
+			TempoMap::updateStart(SIMPLE_TEMPO);
 		}
 
 

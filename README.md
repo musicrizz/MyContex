@@ -6,8 +6,8 @@ Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL pr
 There are also an utility TempoMap to create a map of simple Tempo and Timer.
 
 * You can found complete and working examples in this git repos: 
-	* [My Utility For TheBookOfShader & ShaderToy](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
-	* [Multiple Context GLFW - example](https://github.com/musicrizz/Multiple-Context-GLFW-example)
+	* [MyFragmentsLoader](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
+	* [Multiple Context GLFW](https://github.com/musicrizz/Multiple-Context-GLFW-example)
 
 
 -----------------------------------
@@ -23,14 +23,14 @@ How to use TempoMap :
 
 ```cpp
 	
-const char* SIMPLE_TIMER = "Simple_Timer";
+const char* SIMPLE_TEMPO = "Simple_Tempo";
 
 while(true)  {
-	if(TempoMap::getElapsedMill(SIMPLE_TIMER) >= 1000)  {
+	if(TempoMap::getElapsedMill(SIMPLE_TEMPO) >= 1000)  {
 
 		std::cout<<"hello"<<std::endl; //hello will be printed each second
 
-		TempoMap::updateStart(SIMPLE_TIMER);
+		TempoMap::updateStart(SIMPLE_TEMPO);
 	}
 }
 
@@ -38,38 +38,31 @@ while(true)  {
 
 * create Timer : 
 
-	`static void createTimer(std::string name, void (*pFunc)(), unsigned long long int interval, long long int timeout = -1, bool started = true);`
+	`static void createTimer(std::string name,    // map key
+						void (*pFunc)(),     // function to execute at interval
+						ulong interval,      // interval in millis
+						long long int timeout = -1,  //in millis , if negative the timer is infinite
+						bool started = true);`       //boolean flag to start at creation
 			
-*name*     = map key
-
-*pFunc*    = function to execute at interval
-
-*interval* = interval in millis
-
-*timeout*  = in millis , if negative the timer is infinite
-
-*started*  = boolean flag to start at creation
 
 The timers can start, stop and delete from the map
 
 ```cpp
 
-	std::string timer_simple = "timer simple name";	
 	//Simple Timer - execute function every 400 millis
-	TempoMap::createTimer(timer_simple, []()->void{
+	TempoMap::createTimer("timer1", []()->void{
 		std::cout<<"test timer"<<std::endl;
 	}, 400);
 	
 	//-------
 	
-	std::string timer_with_timeout = "timer timeout name";	
 	//Timer with timeout - execute function every 1,5 seconds ,
 	//and stop after 5 seconds
-	TempoMap::createTimer(timer_simple, []()->void{
+	TempoMap::createTimer("timer2", []()->void{
 		std::cout<<"test timer"<<std::endl;
 	}, 1500, 5000 );
 	
-	//the timers that ended or was stopped can be restarted ;) 
+	//the timers that ended or was stopped can be restarted.
 	TempoMap::startTimer(timer_with_timeout);
 	
 
@@ -79,7 +72,7 @@ The timers can start, stop and delete from the map
 
 How to use multiple GLFW Contex :
 
-* create two OpenGL context : *GLFW VERSION : 3.3.2 X11 GLX EGL OSMesa *
+* create two OpenGL context : *GLFW VERSION : 3.3.2  *
 
 ```cpp
 
@@ -97,12 +90,20 @@ glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	
+//Contexts creation 
+
 const char *CONTEX_1 = "ctx1", *CONTEX_2 = "ctx_2";
 
-//  name,  w,  h, GLFWmonitor*,  visible,  decorated,  trasparentFrameBuffer) 
-OpenGLContext::createContext(CONTEX_1, 400, 400, NULL, true, false, true); //CONTEXT 1
+// CONTEXT_1
+OpenGLContext::createContext(CONTEX_1,  // name 
+						400,      // window width
+						400,      // window height
+						NULL,     // pointer to GLFWmonitor*
+						true,     // window is visible
+						false,    // window is decorated
+						true);    // window trasparent framebuffer
 
-OpenGLContext::createContext(CONTEX_2, 400, 400, NULL, true, false, true); //CONTEXT 2
+OpenGLContext::createContext(CONTEX_2, 400, 400, NULL, true, false, true); //CONTEXT_2
 
 OpenGLContext::setWindowPosition(CONTEX_1, 50, 50);
 OpenGLContext::setWindowPosition(CONTEX_2, 0, 880);
@@ -148,14 +149,13 @@ glfwTerminate();
 * create multiple glsl programs in one context : 
 *for example in the following code, we use previous CONTEX_1 to create two program with uniform buffer and in CONTEX_2 I create a standard glsl program*
 
-  complete example is [MultipleContext](https://github.com/musicrizz/Multiple-Context-GLFW-example) or //TOdo
 
 ```cpp
 
 //CONTEX 1
 OpenGLContext::makecurrent(CONTEX_1);
-ShaderMap::createProgram(SIMPLE_TRIANGLE, "simpleTriangle_vrtx.glsl", "simpleTriangle_frag.glsl");
-ShaderMap::createProgram(POINT_SPRITE, "PointSprite_vertx.glsl", "PointSprite_frag.glsl");
+ShaderMap::createProgram(PGR_1, "vrtx.glsl", "pgr1_frag.glsl");
+ShaderMap::createProgram(PGR_2, "vrtx.glsl", "pgr2_frag.glsl");
 
 unsigned int uniform_binding_point = 2;
 ShaderMap::bindingUniformBlocks("CommonUniform", uniform_binding_point);
@@ -164,7 +164,7 @@ glBindBufferBase(GL_UNIFORM_BUFFER, uniform_binding_point, buffers[UNIFORM]);
 
 //CONTEXT 2
 OpenGLContext::makecurrent(CONTEX_2);
-ShaderMap::createProgram(TEXTURE_CAM, "CameraTexture_vertx.glsl", "CameraTexture_frag.glsl");
+ShaderMap::createProgram(TEXTURE_CAM, "another_vertex.glsl", "another_frag.glsl");
 //.....other OpenGl stuff
 
 while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
@@ -180,6 +180,9 @@ while (!glfwWindowShouldClose(OpenGLContext::getCurrent())) {
 			//DIsplay CONTEX 2
 	OpenGLContext::swapBuffers();
 	OpenGLContext::releaseContex();
+	
+	//the events of keyboard or mouse ecc will be handled 
+	//by the last current context - OpenGLContext::makecurrent(..)
 		
 	glfwPollEvents(); //  It MUST be in the main thread
 		
