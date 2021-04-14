@@ -36,7 +36,9 @@ while(true)  {
 
 ```
 
-* create Timer : 
+* create Timer :    
+*The pFunc will be executed in another thread. Use simple function that don't take much time,   
+soon I have to implement and add a ThreadPool* 
 
 	`static void createTimer(std::string name,    // map key
 						void (*pFunc)(),     // function to execute at interval
