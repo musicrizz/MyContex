@@ -6,7 +6,7 @@ Simple utility to menage multiple OpenGL Context (no share) and multiple GLSL pr
 There are also an utility TempoMap to create a map of simple Tempo and Timer.
 
 * You can found complete and working examples in this git repos: 
-	* [MyFragmentsLoader](https://github.com/musicrizz/MyUtilityForTheBookOfShaderEShaderToy)
+	* [MyFragmentsLoader](https://github.com/musicrizz/MyFragmentsLoader)
 	* [Multiple Context GLFW](https://github.com/musicrizz/Multiple-Context-GLFW-example)
 
 
