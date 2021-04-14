@@ -146,8 +146,10 @@ glfwTerminate();
 	
 ```
 
-* create multiple glsl programs in one context : 
-*for example in the following code, we use previous CONTEX_1 to create two program with uniform buffer and in CONTEX_2 I create a standard glsl program*
+* create multiple glsl programs in one context :   
+*for example in the following code, I use previous CONTEX_1 to create two program with uniform buffer and in CONTEX_2 to create a standard glsl program*   
+
+PS: * at the moment only Vertex and Fragment , .. soon Geometry Shader*
 
 
 ```cpp
