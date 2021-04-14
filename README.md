@@ -40,11 +40,14 @@ while(true)  {
 *The pFunc will be executed in another thread. Use simple function that don't take much time,   
 soon I have to implement and add a ThreadPool* 
 
-	`static void createTimer(std::string name,    // map key
+	```cpp
+	
+	static void createTimer(std::string name,    // map key
 						void (*pFunc)(),     // function to execute at interval
 						ulong interval,      // interval in millis
 						long long int timeout = -1,  //in millis , if negative the timer is infinite
-						bool started = true);`       //boolean flag to start at creation
+						bool started = true);       //boolean flag to start at creation
+	```
 			
 
 The timers can start, stop and delete from the map
