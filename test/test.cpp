@@ -15,8 +15,8 @@ int main(int argc, char **argv) {
 
 	//Simple Timer - execute function every 400 millis
 	TempoMap::createTimer("timer1", []()->void{
-		std::cout<<"test timer simple 400"<<std::endl;
-	}, 400);
+		std::cout<<"test timer simple 500"<<std::endl;
+	}, 500);
 
 	TempoMap::createTimer("timer2", []()->void{
 			std::cout<<"test timer 1500"<<std::endl;

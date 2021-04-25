@@ -42,9 +42,10 @@ soon I have to implement and add a ThreadPool*
 
 	```cpp
 	
-	static void createTimer(std::string name,    // map key
-						void (*pFunc)(),     // function to execute at interval
-						ulong interval,      // interval in millis
+	static void createTimer(
+						std::string name,             // map key
+						std::function<void()> f,     // function to execute at interval
+						ulong interval,              // interval in millis
 						long long int timeout = -1,  //in millis , if negative the timer is infinite
 						bool started = true);       //boolean flag to start at creation
 	```
